@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<title> Game State Page </title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <head>
+
+  </head>
+
+  <body>
+
+  <h1> YOUR SHIPS</h1>
+  <h1>PREDICTIONS </h1>
+
+
+ <div id="playertable">
+    <table>
+
+      <tr>
+        <td class="gridheader"></td>
+        <td class="gridheader">1</td>
+        <td class="gridheader">2</td>
+        <td class="gridheader">3</td>
+        <td class="gridheader">4</td>
+        <td class="gridheader">5</td>
+        <td class="gridheader">6</td>
+        <td class="gridheader">7</td>
+        <td class="gridheader">8</td>
+        <td class="gridheader">9</td>
+        <td class="gridheader">10</td>
+      </tr>
+      <tr>
+        <td class="gridheader">A</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="ship"></td>
+        <td class="ship"></td>
+        <td class="ship"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+      </tr>
+
+      <tr>
+          <td class="gridheader">B</td>
+          <td></td>
+          <td class="miss"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="miss"></td>
+          <td></td>
+          <td></td>
+      </tr>
+
+      <tr>
+            <td class="gridheader">C</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+      </tr>
+
+      <tr>
+          <td class="gridheader">D</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="ship"></td>
+          <td class="ship"></td>
+          <td class="ship"></td>
+          <td class="ship"></td>
+          <td class="ship"></td>
+      </tr>
+
+      <tr>
+        <td class="gridheader">E</td>
+        <td class ="ship"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="hit"></td>
+        <td class="miss"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+
+      <tr>
+          <td class="gridheader">F</td>
+          <td class="ship"></td>
+          <td></td>
+          <td class="miss"></td>
+          <td></td>
+          <td class="ship"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+
+      <tr>
+          <td class="gridheader">G</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="ship"></td>
+          <td></td>
+          <td></td>
+          <td class="miss"></td>
+          <td></td>
+          <td></td>
+
+      </tr>
+
+      <tr>
+          <td class="gridheader">H</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="ship"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+
+      <tr>
+          <td class="gridheader">I</td>
+          <td></td>
+          <td class="miss"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+
+      <tr>
+        <td class="gridheader">J</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="miss"></td>
+        <td></td>
+        <td></td>
+        <td class="ship"></td>
+        <td class="ship"></td>
+        <td class="ship"></td>
+    </tr>
+    </table>
+</div>
+  <div id="predictiontable">
+    <table>
+      <tr>
+        <td class="gridheader"></td>
+        <td class="gridheader">1</td>
+        <td class="gridheader">2</td>
+        <td class="gridheader">3</td>
+        <td class="gridheader">4</td>
+        <td class="gridheader">5</td>
+        <td class="gridheader">6</td>
+        <td class="gridheader">7</td>
+        <td class="gridheader">8</td>
+        <td class="gridheader">9</td>
+        <td class="gridheader">10</td>
+      </tr>
+      <tr>
+        <td class="gridheader">A</td>
+        <td class="miss"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="miss"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+      </tr>
+
+      <tr>
+          <td class="gridheader">B</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+
+      <tr>
+            <td class="gridheader">C</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+      </tr>
+
+      <tr>
+          <td class="gridheader">D</td>
+          <td></td>
+          <td></td>
+          <td class="miss"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+
+      <tr>
+        <td class="gridheader">E</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="miss"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+
+      <tr>
+          <td class="gridheader">F</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+
+      <tr>
+          <td class="gridheader">G</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+
+      </tr>
+
+      <tr>
+          <td class="gridheader">H</td>
+          <td class="miss"></td>
+          <td class="hit"></td>
+          <td class="hit"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+
+      <tr>
+          <td class="gridheader">I</td>
+          <td></td>
+          <td class="miss"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+
+      <tr>
+        <td class="gridheader">J</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    </table>
+  </div>
+<div id="legend">
+    <table>
+      <tr>
+        <td class="gridheader">HIT</td>
+        <td class="hit"></td>
+      </tr>
+
+      <tr>
+        <td class="gridheader">MISS</td>
+        <td class="miss"></td>
+      </tr>
+
+      <tr>
+        <td class="gridheader">SHIP</td>
+        <td class="ship"></td>
+      </tr>
+    </table>
+</div>
+
+  </body>
+</html>

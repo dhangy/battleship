@@ -85,7 +85,7 @@ if (GridCheck(row, col,ship.size,alignment,playerGrid) !== false){
 
         for(var i = 0; i < ship.size; i ++){
             playerGrid[row][col+i] = "="
-            playerShips.carrier.location.push([row, col+i]);
+            ship.location.push([row, col+i]);
                 }
 
             }
@@ -93,7 +93,7 @@ if (GridCheck(row, col,ship.size,alignment,playerGrid) !== false){
 
         for(var i = 0; i < ship.size; i ++){
             playerGrid[row+i][col] = "="
-
+            ship.location.push([row+1, col]);
                 }
             }
         }
@@ -122,7 +122,7 @@ function gridMiss(row,col,grid){
 }
 
 function shipSunk(){
-s
+
 }
 
 function getPoint(grid,row,col){
@@ -136,15 +136,15 @@ function GridCheck(row, col, size, alignment,playerGrid){
         //if it is horizontal check to see
 
         if (alignment == "horizontal") {
-            if((row+size) > 10){
-                alert("OUT OF BOUNDS!");
+            if((col+size) > 10){
+                alert("IM BORKED!");
                 return false;
             }
             else {
             for(var i = 0; i < size; i ++){
                 if (playerGrid[row][col+i] !== ""){
                     alert("Invalid Ship Placement");
-                    console.log(playerGrid[row][startCol+i]);
+                    console.log(playerGrid[row][col+i]);
                     return false;
                 }
 
@@ -153,7 +153,7 @@ function GridCheck(row, col, size, alignment,playerGrid){
     }
         else if (alignment == "vertical") {
 
-            if(playerGrid[col+size] > 10){
+            if(playerGrid[row+size] > 10){
                 alert("OUT OF BOUNDS!");
                 return false;
             }
@@ -172,8 +172,43 @@ function GridCheck(row, col, size, alignment,playerGrid){
     }
 }
 
-//function returnShip(playerShips){
-//    for (var ship in playerShips){
-//        console.log(ship);
-//    }
-//}//
+function returnShip(playerShips,coordinates){
+
+   for (var ship in playerShips){
+        //console.log(ship);
+        var shipLen = playerShips[ship].size;
+        // loop ship locations
+
+
+        for(var i = 0; i < shipLen; i++) {
+            console.log(playerShips[ship].location[i]);
+            console.log(ship);
+            var shipLocation = playerShips[ship].location[i].toString();
+            var coordinate = coordinates.toString();
+            if(coordinate == shipLocation){
+                playerShips[ship].hits++;
+            }
+
+
+            // compare location against x y
+
+        }
+
+        //playerShips[ship].location[]
+
+        // if hit playerShips[ship].hits++
+
+
+        //console.log(playerShips[ship].hits);
+        //for(var location in )
+    }
+}
+
+
+function testPlacement(){
+    placeShip(playerShips.carrier,3,2,"horizontal",playerGrid);
+    placeShip(playerShips.battleShip, 1,0,"horizontal", playerGrid);
+    placeShip(playerShips.cruiser, 9,1,"horizontal",playerGrid);
+    placeShip(playerShips.submarine, 5, 5,"vertical",playerGrid);
+    placeShip(playerShips.destroyer, 8,1,"horizontal",playerGrid);
+}

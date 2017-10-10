@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+    </head>
+
+    <body>
+        <div id="container">
+
+        </div>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          var table = createBoard(10,10);
+          var grid = document.getElementById('container');
+          grid.innerHTML = table;
+      });
+
+        </script>
+
+  <script src="createBoard.js" type="application/javascript"></script>
+    </body>
+</html>

@@ -1,0 +1,74 @@
+tbody, td {
+  border-style: solid;
+  border-width: 2px;
+
+
+
+}
+
+table {
+  display: inline;
+  height: 500px;
+  width: 500px;
+  padding: 20px;
+}
+ td {
+  height: 40px;
+  width: 40px;
+  background-color: #ade9ff;
+  text-align: center;
+
+}
+
+h1 {
+  display: inline;
+  margin: 0px auto;
+  padding: 205px;
+  font-family: impact;
+}
+
+#legend{
+  padding-top: 20px;
+}
+
+.hit{
+  background-color: #f26060;
+  border: 3px solid #545963 ;
+
+}
+
+.miss{
+  background-color: #fff7f7;
+}
+
+.ship{
+  background-color: #545963;
+}
+
+.gridheader {
+  background-color: #cccccc;
+}
+
+#playertable{
+display: inline;
+maring-top: 20px;
+}
+
+#predictiontable{
+display: inline;
+padding-top: 20px;
+}
+
+#descriptTitle {
+padding: 350px;
+color: #f26060;
+}
+.landingPage{
+    background-color: #ade9ff;
+}
+
+#logo{
+    height:555px;
+    width: 480px;
+
+}

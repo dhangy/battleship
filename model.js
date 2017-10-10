@@ -5,9 +5,10 @@ function Game(playerGrid, computerGrid, playerShips, computerShips){
     this.playerGrid = playerGrid;
     this.computerGrid = computerGrid;
     this.playerShips = playerShips;
-    this.computerShips = computerShips;
-    var guessArray = new Array();
+    this.computerShips = computerShips;ss
     var gameComplete = false;
+    var isPlayersTurn = true;
+    var allShipsPlaced = false;
 }
 
 
@@ -172,26 +173,24 @@ function markShipHit(turnShips,coordinates){
 
    for (var ship in turnShips){
         var shipLen = turnShips[ship].size;
-
         for(var i = 0; i < shipLen; i++) {
             console.log(turnShips[ship].location[i]);
             console.log(ship);
             var shipLocation = turnShips[ship].location[i].toString();
             var coordinate = coordinates.toString();
-            if(coordinate == shipLocation){
-                turnShips[ship].hits++;
-                if (turnShips[ship].hits == turnShips[ship].size){
-                    turnShips[ship].sunk = true;
-                    turnShips.shipsSunk++;
-                    isGameOver(turnShips);
-                    console.log("Its Sunk!")
-
-                }
+                if(coordinate == shipLocation){
+                    turnShips[ship].hits++;
+                        if (turnShips[ship].hits == turnShips[ship].size){
+                            turnShips[ship].sunk = true;
+                            turnShips.shipsSunk++;
+                            isGameOver(turnShips);
+                            console.log("Its Sunk!")
+                        }
                 return;
+                }
             }
         }
     }
-}
 
 
 function testPlacement(grid){

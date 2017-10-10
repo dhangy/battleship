@@ -25,6 +25,7 @@ function initPlayerShips(playerShips){
     playerShips.cruiser = new Ship(3, []);
     playerShips.submarine = new Ship(3, []);
     playerShips.destroyer = new Ship(2, []);
+    playerShips.shipsSunk = 0;
 }
 
 function initComputerShips(computerShips){
@@ -34,10 +35,12 @@ function initComputerShips(computerShips){
     computerShips.cruiser = new Ship(3, []);
     computerShips.submarine = new Ship(3, []);
     computerShips.destroyer = new Ship(2, []);
+    computerShips.shipsSunk = 0;
 }
 
 
 function playerShips(){
+    this.shipsSunk;
     this.carrier;
     this.battleShip;
     this.cruiser;
@@ -46,6 +49,7 @@ function playerShips(){
 }
 
 function computerShips(){
+    this.shipsSunk;
     this.carrier;
     this.battleShip;
     this.cruiser;
@@ -98,42 +102,36 @@ if (GridCheck(row, col,ship.size,alignment,playerGrid) !== false){
             }
         }
     }
-function launchMissile(row,col,grid){
+function launchMissile(row,col,grid, turnShips){
     if (grid[row][col] == "X" || grid[row][col]== "O"){
         alert("Already Launched Missile to this Point!");
         return;
     }
     else if (grid[row][col] == "") {
-
+        console.log("miss");
         gridMiss(row,col,grid);
     }
     else if (grid[row][col] == "=") {
-
+        console.log("hit")
         gridHit(row,col,grid);
+        var coordinates = [row,col];
+        markShipHit(turnShips,coordinates);
     }
 }
 
 function gridHit(row,col,grid) {
     grid[row][col] = "X"
+
 }
 
 function gridMiss(row,col,grid){
     grid[row][col] = "O"
 }
 
-function shipSunk(){
-
-}
-
-function getPoint(grid,row,col){
-    grid[row][col] = "X"
-
-}
 
 function GridCheck(row, col, size, alignment,playerGrid){
 
     if (row < 10 && col < 10) {
-        //if it is horizontal check to see
 
         if (alignment == "horizontal") {
             if((col+size) > 10){
@@ -147,7 +145,6 @@ function GridCheck(row, col, size, alignment,playerGrid){
                     console.log(playerGrid[row][col+i]);
                     return false;
                 }
-
             }
         }
     }
@@ -156,14 +153,13 @@ function GridCheck(row, col, size, alignment,playerGrid){
             if(playerGrid[row+size] > 10){
                 alert("OUT OF BOUNDS!");
                 return false;
-            }
+                }
             for(var i = 0; i < size; i ++){
                 if (playerGrid[row+1][col] !== ""){
                     alert("Invalid Ship Placement");
                     return false;
                 }
             }
-
         }
     }
     else {
@@ -172,43 +168,43 @@ function GridCheck(row, col, size, alignment,playerGrid){
     }
 }
 
-function returnShip(playerShips,coordinates){
+function markShipHit(turnShips,coordinates){
 
-   for (var ship in playerShips){
-        //console.log(ship);
-        var shipLen = playerShips[ship].size;
-        // loop ship locations
-
+   for (var ship in turnShips){
+        var shipLen = turnShips[ship].size;
 
         for(var i = 0; i < shipLen; i++) {
-            console.log(playerShips[ship].location[i]);
+            console.log(turnShips[ship].location[i]);
             console.log(ship);
-            var shipLocation = playerShips[ship].location[i].toString();
+            var shipLocation = turnShips[ship].location[i].toString();
             var coordinate = coordinates.toString();
             if(coordinate == shipLocation){
-                playerShips[ship].hits++;
+                turnShips[ship].hits++;
+                if (turnShips[ship].hits == turnShips[ship].size){
+                    turnShips[ship].sunk = true;
+                    turnShips.shipsSunk++;
+                    isGameOver(turnShips);
+                    console.log("Its Sunk!")
+
+                }
+                return;
             }
-
-
-            // compare location against x y
-
         }
-
-        //playerShips[ship].location[]
-
-        // if hit playerShips[ship].hits++
-
-
-        //console.log(playerShips[ship].hits);
-        //for(var location in )
     }
 }
 
 
-function testPlacement(){
-    placeShip(playerShips.carrier,3,2,"horizontal",playerGrid);
-    placeShip(playerShips.battleShip, 1,0,"horizontal", playerGrid);
-    placeShip(playerShips.cruiser, 9,1,"horizontal",playerGrid);
-    placeShip(playerShips.submarine, 5, 5,"vertical",playerGrid);
-    placeShip(playerShips.destroyer, 8,1,"horizontal",playerGrid);
+function testPlacement(grid){
+    placeShip(playerShips.carrier,3,2,"horizontal",grid);
+    placeShip(playerShips.battleShip, 1,0,"horizontal", grid);
+    placeShip(playerShips.cruiser, 9,1,"horizontal",grid);
+    placeShip(playerShips.submarine, 5, 5,"vertical",grid);
+    placeShip(playerShips.destroyer, 8,1,"horizontal",grid);
+}
+
+function isGameOver(turnShips){
+    if(turnShips.shipsSunk >= 5) {
+        alert("GAME IS OVER!");
+        game.gameComplete = true;
+    }
 }

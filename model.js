@@ -5,12 +5,11 @@ function Game(playerGrid, computerGrid, playerShips, computerShips){
     this.playerGrid = playerGrid;
     this.computerGrid = computerGrid;
     this.playerShips = playerShips;
-    this.computerShips = computerShips;ss
-    var gameComplete = false;
-    var isPlayersTurn = true;
-    var allShipsPlaced = false;
+    this.computerShips = computerShips;
+    this.gameComplete = false;
+    this.isPlayersTurn = true;
+    this.allShipsPlaced = false;
 }
-
 
 function Ship(size, location){
     this.size = size;
@@ -37,8 +36,9 @@ function initComputerShips(computerShips){
     computerShips.submarine = new Ship(3, []);
     computerShips.destroyer = new Ship(2, []);
     computerShips.shipsSunk = 0;
+    computerShips.lastHitCoordinates = [];
+    computerShips.hasHitPlayer = false;
 }
-
 
 function playerShips(){
     this.shipsSunk;
@@ -56,8 +56,9 @@ function computerShips(){
     this.cruiser;
     this.submarine;
     this.destroyer;
+    this.lastHitCoordinates;
+    this.hasHitPlayer;
 }
-
 
 //functions that i am going to need!
 
@@ -103,30 +104,37 @@ if (GridCheck(row, col,ship.size,alignment,playerGrid) !== false){
             }
         }
     }
-function launchMissile(row,col,grid, turnShips){
+function launchMissile(row,col,grid, enemy){
+    var missile;
     if (grid[row][col] == "X" || grid[row][col]== "O"){
         alert("Already Launched Missile to this Point!");
-        return;
-    }
+        missile = "again";
+
+        }
+
     else if (grid[row][col] == "") {
         console.log("miss");
         gridMiss(row,col,grid);
+        missile = "miss";
+
     }
     else if (grid[row][col] == "=") {
         console.log("hit")
         gridHit(row,col,grid);
         var coordinates = [row,col];
-        markShipHit(turnShips,coordinates);
+        markShipHit(enemy,coordinates);
+        missile = "hit";
+
     }
+    return missile;
 }
 
 function gridHit(row,col,grid) {
-    grid[row][col] = "X"
-
+    grid[row][col] = "X";
 }
 
 function gridMiss(row,col,grid){
-    grid[row][col] = "O"
+    grid[row][col] = "O";
 }
 
 
@@ -184,7 +192,7 @@ function markShipHit(turnShips,coordinates){
                             turnShips[ship].sunk = true;
                             turnShips.shipsSunk++;
                             isGameOver(turnShips);
-                            console.log("Its Sunk!")
+                            console.log("Its Sunk!");
                         }
                 return;
                 }
@@ -193,12 +201,12 @@ function markShipHit(turnShips,coordinates){
     }
 
 
-function testPlacement(grid){
-    placeShip(playerShips.carrier,3,2,"horizontal",grid);
-    placeShip(playerShips.battleShip, 1,0,"horizontal", grid);
-    placeShip(playerShips.cruiser, 9,1,"horizontal",grid);
-    placeShip(playerShips.submarine, 5, 5,"vertical",grid);
-    placeShip(playerShips.destroyer, 8,1,"horizontal",grid);
+function testPlacement(grid, turnShips){
+    placeShip(turnShips.carrier,3,2,"horizontal",grid);
+    placeShip(turnShips.battleShip, 1,0,"horizontal", grid);
+    placeShip(turnShipscruiser, 9,1,"horizontal",grid);
+    placeShip(turnShips.submarine, 5, 5,"vertical",grid);
+    placeShip(turnShips.destroyer, 8,1,"horizontal",grid);
 }
 
 function isGameOver(turnShips){
@@ -206,4 +214,19 @@ function isGameOver(turnShips){
         alert("GAME IS OVER!");
         game.gameComplete = true;
     }
+}
+
+function generatePoint(){
+    return Math.floor(Math.random() * 10) + 1;
+}
+
+function getLastHitCoordinates() {
+    return computerShips.lastHitCoordinates;
+}
+
+function setLastHitCoordinates(coordinates){
+    computerShips.lastHitCoordinates.push(coordinates);
+}
+function hasHitPlayer(){
+    computerShips.hasHitPlayer = true;
 }

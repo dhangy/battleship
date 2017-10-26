@@ -1,0 +1,86 @@
+<DOCTYPE! html>
+ <html>
+        <body>
+            <ol>
+                <h2>Game Logic:</h2>
+                <li>
+                    A function that initializes the game object( which includes grids, ships etc). Must be called before game
+                    can be tested in console.
+	                  <h4>initializeGame();</h4>
+                </li>
+                <li>
+                    Takes a random point and pass into a function that places a ship.
+                    Enter in what type of ship (carrier,battleship etc)
+                    then the row and column on the grid (the random point),
+                    then horizontal or vertical and lastly which grid you are
+                    placing it on (playerGrid or computerGrid)
+                    <h4>placeShip(ship, row, col, alignment, playerGrid);</h4>
+                </li>
+                <li>
+                    A function that checks to make sure that the ship placement function is going
+                    to be placed in a valid location. It gets called within the placeShip function
+                    to check the validity before the ship is ever placed
+                    <h4>GridCheck(row, col, size, alignment,playerGrid);</h4>
+                </li>
+                <li>
+                    A way to randomly generate points to be used on the grid
+                    <h4>generatePoint(); (returns a point)</h4>
+                </li>
+                <li>
+                    A hard coded ship placement used for testing. Comes with all ships being created
+                    in a set location. All you have to do is pass in which grid you are wanting to
+                    place on and whose ships you are placing: for example:
+	                 <h4>testPlacement(playerGrid, playerShips)</h4>
+		                     Or
+	                <h4>testPlacement(computerGrid, computerShips)</h4>
+                </li>
+                <li>
+                    A function that is used to launch missiles on the enemies grid. This function checks
+                    to see if the location you are passing in has already been shot at (hit or miss) if
+                    it has it notifies the user that it has already marked this point. If it hasnt then it
+                    checks the grid and marks it either hit or miss which are represented by O for miss and
+                     X for hit. If it hits it calls another function that marks the enemies Ship object
+                     as hit (markShipHit)
+                     <h4>launchMissile(row,col,grid, enemy)</h4>
+
+                     Inner function of launch Missile:
+                     <h4>markShipHit(turnShips,coordinates)</h4>
+                     This function loops over either the playerShips object or the computerShips object
+                     (depending on what you pass in the turnShips parameter) and checks each ships set
+                     location to see if they contain in the location array the same coordinates as what
+                      you passed in. When it finds it it incriments the hits attribute on that ship. It
+                       also checks to see if it sunk the ship that was hit. If so it increments the counter
+                        on the corresponding playerShips or computerShips shipsSunk. It also checks each
+                        time is sinks one to see if the game is over by calling the
+                        <h4>isGameOver()</h4> if it is it alerts the user.
+                </li>
+                <li>
+                    I am currently working on the computer guessing logic.
+                    Thus far I have made a function that does unintelligent random guessing. It takes a
+                    random point and calls the launch missile object on the playerGrid.
+               <h4>computerRandomGuess()</h4>
+                </li>
+                <li>
+                    I am working on making the function
+                     <h4>targetComputerGuess()</h4>
+                     which will hopefully make it so that once the computer makes a hit on the following
+                     turn it will call this function which will pick an adjacent point to guess.
+                </li>
+                <li>
+                    I still need to add functions that will control the turns for player and compute
+                    The computerTurn() function will call either the randomGuess or targetedGuess based
+                    on whether or not it had a hit the previous turn.
+                </li>
+                <li>
+                    I need to add something that will manage game states.<br />
+                </li>
+                <li>
+                    I need to work on the interface aspect quite a lot.<br />
+                </li>
+            </ol>
+
+
+
+        </body>
+
+</html>

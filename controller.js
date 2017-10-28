@@ -2,7 +2,7 @@ initializeGame();
 testPlacement();
 
 function computerRandomGuess(){
-    var row = generatePoint();
+    var row = generatePoint();    
     var col = generatePoint();
     var grid = playerGrid;
     var enemy = playerShips;

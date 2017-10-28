@@ -1,6 +1,6 @@
 function buttonClick() {
-    var e = document.getElementById("loginButton");
-    e.addEventListener("click", function(e) {
+    var loginButtonElement = document.getElementById("loginButton");
+    loginButtonElement.addEventListener("click", function(loginButtonElement) {
         validateLogin();
 
     });

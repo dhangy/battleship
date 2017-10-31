@@ -11,6 +11,10 @@
             <a href="gameLogic.html"><img id="game-logic" class = "icon"src="assets/game-logic.png" /></a>
             <a href="index.html"><img id="rules-icon" class="icon" src="assets/rules-icon.png" /></a>
                 <img id="signatureImg" src="assets/signature.gif" alt = "signature animation" />
+                <div id="userInfo"></div>
+                <button id="clearLocalStorage">Clear User Data</button>
+
+
         </div>
 <div id="playerBoardParent">
     <div id="playerBoardHeader"></div>
@@ -65,6 +69,7 @@
 
   <script src="model.js" type="application/javascript"></script>
   <script src="createBoard.js" type="application/javascript"></script>
+   <script src="userLogin.js" type="application/javascript"></script>
 
   <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -84,6 +89,8 @@
     inputBlur();
     orientationButtonClick();
     moveSignature();
+    loadUserCredentials();
+    clearUserData();
 });
   </script>
 

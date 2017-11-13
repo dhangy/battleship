@@ -204,7 +204,7 @@ function markShipHit(turnShips,coordinates){
 function testPlacement(grid, turnShips){
     placeShip(turnShips.carrier,3,2,"horizontal",grid);
     placeShip(turnShips.battleShip, 1,0,"horizontal", grid);
-    placeShip(turnShipscruiser, 9,1,"horizontal",grid);
+    placeShip(turnShips.cruiser, 9,1,"horizontal",grid);
     placeShip(turnShips.submarine, 5, 5,"vertical",grid);
     placeShip(turnShips.destroyer, 8,1,"horizontal",grid);
 }

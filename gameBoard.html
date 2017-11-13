@@ -73,10 +73,11 @@
 
   <script>
   document.addEventListener("DOMContentLoaded", function() {
-      
-    var playerTable = createBoard(10,10,"playerTable");
+    var game = initializeGame();
+    testPlacement(game.playerGrid, game.playerShips);
+    var playerTable = createBoard(game.playerGrid, "playerTable");
     var computerTable = createBoard(10,10,"computerTable");
-    var playerHeaderTable = createHeader(10,10,)
+    var playerHeaderTable = createHeader(10,10,);
     var playerGrid = document.getElementById('playerBoardContainer');
     var playerHeader = document.getElementById('playerBoardHeader');
     var computerGrid = document.getElementById('computerBoardContainer');

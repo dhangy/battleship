@@ -1,20 +1,29 @@
- 
-function createBoard(x,y,gridType) {
+function createBoard(modelGrid,gridType) {
     var table = '';
-    var row = x;
-    var col = y;
+     var size = modelGrid.length;
     var rcounter = 0;
-    for(var r = 0; r < row; r++){
+    for(var r = 0; r < size; r++){
         table += '<tr>';
         rcounter++;
-        for(var c = 0; c < col; c++){
+        for(var c = 0; c < size; c++){
             rcounter++;
+            var tileStatus = "";
+            if (modelGrid[r][c] == "="){
+                tileStatus = "ship";
+            }
+            if(modelGrid[r][c] == "X"){
+                tileStatus = "hit";
+            }
+            if(modelGrid[r][c] == "O") {
+                tileStatus = "miss"
+            }
+
             if (rcounter%2 == 0){
-                table+= '<td class="blue_two gameboardCells ' + gridType + '" data-x=' + r + ' data-y=' + c + '>' +  '</td>';
+                table+= '<td class="blue_two gameboardCells ' + gridType + ' '+ tileStatus +'" data-x=' + r + ' data-y=' + c + '>' +  '</td>';
 
             }
             else {
-                table+= '<td class="blue_one gameboardCells '+ gridType + '" data-x=' + r + ' data-y=' + c + '>' + '</td>';
+                table+= '<td class="blue_one gameboardCells '+ gridType + ' ' + tileStatus +'" data-x=' + r + ' data-y=' + c + '>' + '</td>';
             }
         }
             table+= '</tr>';

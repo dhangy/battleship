@@ -1,12 +1,11 @@
 function createBoard(modelGrid,gridType) {
     var table = '';
-    var row = modelGrid.length;
-    var col = modelGrid.length;
+     var size = modelGrid.length;
     var rcounter = 0;
-    for(var r = 0; r < row; r++){
+    for(var r = 0; r < size; r++){
         table += '<tr>';
         rcounter++;
-        for(var c = 0; c < col; c++){
+        for(var c = 0; c < size; c++){
             rcounter++;
             var tileStatus = "";
             if (modelGrid[r][c] == "="){

@@ -1,4 +1,4 @@
-
+ 
 function createBoard(x,y,gridType) {
     var table = '';
     var row = x;

@@ -98,7 +98,7 @@ td:hover{
         filter: brightness(0);
 
 }
-img:hover{
+img:hover,img:active{
     filter: none;
 }
 
@@ -152,9 +152,13 @@ width:100px;
 
 }
 
-.icon:hover{
+/*.icon:hover{
     filter: none;
 }
+
+.icon:active{
+    filter: none;
+}*/
 
 .grids{
     display:block;

@@ -16,9 +16,10 @@
 
 
         </div>
+
 <div id="playerBoardParent">
     <div id="playerBoardHeader"></div>
-
+        <div id="jsonStatus"></div>
 
         <div id="playerBoardContainer" class = "grids"></div>
     </div>
@@ -28,22 +29,23 @@
 </div>
 
 
-        <div>
+
+        <!-- <div>
         <h3>Input Player Name!</h3>
         <h3 id ="nameChoice"></h3>
         <input id="nameInput" />
 
-        </div>
+        </div> -->
 
 
-        <div>
+        <!-- <div>
         <h3>Do you want to place your own ships?</h3>
         <h3 id="choice"></h3>
       <select id="choiceSelect">
       <option  value="Player Choice">Yes! I want to place my own ships!</option>
       <option value = "CPU generated">No! Have ship locations generated for me!</option>
       </select>
-    </div>
+    </div> -->
 
     <div>
         <h3>What Ship Do you want to place?</h3>
@@ -68,15 +70,17 @@
 
 
   <script src="model.js" type="application/javascript"></script>
+  <script src="presetConfig.json" type="application/json"></script>
   <script src="createBoard.js" type="application/javascript"></script>
-   <script src="userLogin.js" type="application/javascript"></script>
+  <script src="presetConfig.js" type="application/javascript"></script>
+  <script src="userLogin.js" type="application/javascript"></script>
 
   <script>
   document.addEventListener("DOMContentLoaded", function() {
     var game = initializeGame();
-    testPlacement(game.playerGrid, game.playerShips);
+    shipPreset();
     var playerTable = createBoard(game.playerGrid, "playerTable");
-    var computerTable = createBoard(10,10,"computerTable");
+    var computerTable = createBoard(game.computerGrid,"computerTable");
     var playerHeaderTable = createHeader(10,10,);
     var playerGrid = document.getElementById('playerBoardContainer');
     var playerHeader = document.getElementById('playerBoardHeader');
@@ -86,11 +90,11 @@
     computerGrid.innerHTML = computerTable;
     gridClick('playerTable');
     gridClick('computerTable');
-    selectorEvent();
+    // selectorEvent();
     shipButtonClick();
-    inputBlur();
+    // inputBlur();
     orientationButtonClick();
-    moveSignature();
+    // moveSignature();
     loadUserCredentials();
     clearUserData();
 });

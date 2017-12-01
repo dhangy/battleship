@@ -85,11 +85,19 @@ function createGrid(col,row) {
     return grid;
 }
 
-function placeShip(ship, row, col, alignment, playerGrid){
-if (GridCheck(row, col,ship.size,alignment,playerGrid) !== false){
+function placeShip(ship, row, col, alignment, playerGrid,size){
+    var shipLen;
+    if(ship.size == null) {
+        shipLen = size;
+    }
+    else {
+        shipLen = ship.size;
+    }
+
+if (GridCheck(row, col,shipLen,alignment,playerGrid) !== false){
     if (alignment == "horizontal") {
 
-        for(var i = 0; i < ship.size; i ++){
+        for(var i = 0; i < shipLen; i ++){
             playerGrid[row][col+i] = "="
             ship.location.push([row, col+i]);
                 }
@@ -97,7 +105,7 @@ if (GridCheck(row, col,ship.size,alignment,playerGrid) !== false){
             }
     else if (alignment == "vertical") {
 
-        for(var i = 0; i < ship.size; i ++){
+        for(var i = 0; i < shipLen; i ++){
             playerGrid[row+i][col] = "="
             ship.location.push([row+1, col]);
                 }
@@ -138,8 +146,7 @@ function gridMiss(row,col,grid){
 }
 
 
-function GridCheck(row, col, size, alignment,playerGrid){
-
+function GridCheck(row, col, size, alignment,playerGrid,){
     if (row < 10 && col < 10) {
 
         if (alignment == "horizontal") {
@@ -149,9 +156,9 @@ function GridCheck(row, col, size, alignment,playerGrid){
             }
             else {
             for(var i = 0; i < size; i ++){
-                if (playerGrid[row][col+i] !== ""){
-                    alert("Invalid Ship Placement");
+                if (playerGrid[row][col+i] == "="){
                     console.log(playerGrid[row][col+i]);
+                    alert("Invalid Ship Placement");
                     return false;
                 }
             }

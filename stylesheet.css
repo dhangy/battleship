@@ -181,3 +181,6 @@ width:100px;
     position: absolute;
     z-index: -100;
 }
+#jsonStatus {
+    position: absolute;
+}

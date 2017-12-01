@@ -96,16 +96,6 @@ function shipButtonClick(){
 }
 }
 
-function inputBlur(){
-    var e = document.getElementById("nameInput");
-    console.log(e);
-    e.addEventListener("input", function(e){
-        var name = e.target.value;
-        var header = document.getElementById("nameChoice");
-        header.innerHTML = name;
-    })
-}
-
 function orientationButtonClick(){
     var buttons = document.getElementsByClassName("orientationButtons");
     for(var i = 0; i < buttons.length; i++){
@@ -118,19 +108,3 @@ function orientationButtonClick(){
         });
     }
 }
-
-
-function moveSignature() {
-      var elem = document.getElementById("signatureImg");
-      var pos = 250 ;
-      var id = setInterval(frame, 2);
-      function frame() {
-        if (pos == 0) {
-          clearInterval (id);
-        } else {
-          pos--;
-          elem.style.top = pos + 'px';
-          elem.style.left = pos + 'px';
-        }
-      }
-    }

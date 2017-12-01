@@ -1,0 +1,51 @@
+{
+    "playerShips": [
+        {
+            "name": "carrier",
+            "row" : 4,
+            "col" : 2,
+            "orientation" : "horizontal",
+            "grid" : "playerGrid",
+            "size" : 5
+
+        },
+
+        {
+            "name" : "battleShip",
+            "row" : 1,
+            "col" : 0,
+            "orientation" : "horizontal",
+            "grid" : "playerGrid",
+            "size" : 4
+        },
+
+        {
+            "name" : "cruiser",
+            "row" : 9,
+            "col" : 1,
+            "orientation" : "horizontal",
+            "grid" : "playerGrid",
+            "size" : 3
+        },
+
+        {
+            "name" : "submarine",
+            "row" : 5,
+            "col" : 5,
+            "orientation" : "vertical",
+            "grid" : "playerGrid",
+            "size" : 4
+        },
+
+        {
+            "name" : "destroyer",
+            "row" : 8,
+            "col" : 1,
+            "orientation" : "horizontal",
+            "grid" : "playerGrid",
+            "size" : 2
+        }
+    ],
+    "display" : "Player ships automatically placed for you!"
+
+}

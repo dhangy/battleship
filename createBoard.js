@@ -49,9 +49,9 @@ function createHeader(){
     }
     return '<table class = "header">' + table + '</table>'
 }
-function gridClick(grid){
-    var className = grid;
-    var cells = document.getElementsByClassName(className);
+
+function playerGridClick(model){
+    var cells = document.getElementsByClassName('playerTable');
     console.log(cells.length);
     for (var i = 0; i < cells.length; i++){
         cells[i].addEventListener("click", function(e) {
@@ -62,14 +62,32 @@ function gridClick(grid){
             var contents = "(" + x + "," + y + ")";
             this.innerHTML = contents;
             this.className += " hit";
+            model.lastClickedPlayerRow = parseInt(x);
+            model.lastClickedPlayerColumn = parseInt(y);
 
- });
-
-
-
-
-}
+            });
+        }
     }
+
+    function computerGridClick(model){
+        var cells = document.getElementsByClassName('computerTable');
+        console.log(cells.length);
+        for (var i = 0; i < cells.length; i++){
+            cells[i].addEventListener("click", function(e) {
+                console.log("IT WORKED!");
+
+                var y = e.target.dataset.y;
+                var x = e.target.dataset.x;
+                var contents = "(" + x + "," + y + ")";
+                this.innerHTML = contents;
+                this.className += " hit";
+                model.lastClickedComputerRow = parseInt(x);
+                model.lastClickedComputerColumn = parseInt(y);
+
+                });
+            }
+        }
+
 
 function selectorEvent(){
     var e = document.getElementById("choiceSelect");
@@ -84,27 +102,83 @@ function selectorEvent(){
 
 }
 
-function shipButtonClick(){
+function shipButtonClick(model){
     var buttons = document.getElementsByClassName("shipButtons");
     for(var i = 0; i < buttons.length; i++){
     buttons[i].addEventListener("click", function(e){
-        var name = this.id;
+        var shipName = this.id;
         var header = document.getElementById("shipChoice");
         header.innerHTML = name;
+        model.selectedShip = model.playerShips[shipName];
+        model.lastClickedButton = shipName;
+        console.log(model.selectedShip);
 
     });
 }
 }
 
-function orientationButtonClick(){
+function orientationButtonClick(model){
     var buttons = document.getElementsByClassName("orientationButtons");
     for(var i = 0; i < buttons.length; i++){
     buttons[i].addEventListener("click", function(e){
         var name = this.id;
         var header = document.getElementById("orientationChoice");
         header.innerHTML = name;
-
+        model.selectedOrientation = name;
 
         });
     }
+}
+
+function placeShipButtonClick(model){
+    var placeShipButton = document.getElementById("placeShipButton");
+    placeShipButton.addEventListener("click", function(e){
+        var ship = model.selectedShip;
+        var coordinates = model.lastClickedPlayerSquare;
+        var row = model.lastClickedPlayerRow;
+        var col = model.lastClickedPlayerColumn;
+        var alignment = model.selectedOrientation;
+        var playerGrid = model.playerGrid;
+        placeShip(ship, row, col, alignment, playerGrid);
+        var buttonId =  model.lastClickedButton+"Bttn";
+        var buttonImg = model.lastClickedButton;
+        disableButtons(buttonId,buttonImg);
+        var setupComplete = isSetupStateComplete();
+        if (setupComplete = true){
+
+        }
+
+
+
+
+    });
+}
+
+function disableButtons(buttonId, buttonImg){
+    var button = document.getElementById(buttonId);
+    button.disabled = true;
+    button.className+= "disabledButton";
+    buttonImg.className+= "disabledImg";
+    document.getElementById(buttonImg).removeEventListener("click", shipButtonClick, true);
+
+}
+
+function isSetupStateComplete(){
+        var completeCounter = 0;
+        var buttons = document.getElementsByClassName("shipButtons");
+        for(var i = 0; i < buttons.length; i++){
+            if(buttons[i].disabled = true){
+                completeCounter++;
+            }
+        }
+        if (completeCounter = 5){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+}
+function beginPlayState(){
+
 }

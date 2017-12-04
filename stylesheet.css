@@ -95,7 +95,7 @@ td:hover{
 
 .shipButtons{
         filter: grayscale(100);
-        filter: brightness(0);
+
 
 }
 img:hover,img:active{
@@ -103,7 +103,7 @@ img:hover,img:active{
 }
 
 img:checked{
-    filter: grayscale(100);s
+    filter: grayscale(100);
 }
 .hit{
   background-color: #f26060;
@@ -187,4 +187,14 @@ width:100px;
 }
 #jsonStatus {
     position: absolute;
+}
+
+.disabledButton{
+        pointer-events: none;
+        filter: brightness(100);
+
+}
+.disabledImg.ship{
+        filter: none;
+
 }

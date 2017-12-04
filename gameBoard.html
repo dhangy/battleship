@@ -22,6 +22,7 @@
         <div id="jsonStatus"></div>
 
         <div id="playerBoardContainer" class = "grids"></div>
+        <button id="placeShipButton">PlaceShip</button>
     </div>
     <div id="computerBoardParent">
         <div id="computerBoardHeader"></div>
@@ -50,11 +51,11 @@
     <div>
         <h3>What Ship Do you want to place?</h3>
         <h3 id ="shipChoice"></h3>
-        <button><img class = "shipButtons" id="carrier" src = "assets/carrier.png" alt="carrier button"></button>
-        <button>  <img class = "shipButtons" id="battleShip" src = "assets/battleship-icon.png" alt="carrier button"></button>
-        <button><img class = "shipButtons" id="cruiser" src = "assets/cruiser.png" alt="carrier button"></button>
-        <button><img class = "shipButtons" id="submarine" src = "assets/submarine.png" alt="carrier button"></button>
-        <button><img class = "shipButtons" id="destroyer" src = "assets/destroyer.png" alt="carrier button"></button>
+        <button id="carrierBttn"><img class = "shipButtons" id="carrier" src = "assets/carrier.png" alt="carrier button"></button>
+        <button id="battleShipBttn"><img class = "shipButtons" id="battleShip" src = "assets/battleship-icon.png" alt="carrier button"></button>
+        <button id="cruiserBttn"><img class = "shipButtons" id="cruiser" src = "assets/cruiser.png" alt="carrier button"></button>
+        <button id="submarineBttn"><img class = "shipButtons" id="submarine" src = "assets/submarine.png" alt="carrier button"></button>
+        <button id="destroyerBttn"><img class = "shipButtons" id="destroyer" src = "assets/destroyer.png" alt="carrier button"></button>
           </div>
 
 
@@ -74,13 +75,12 @@
   <script src="createBoard.js" type="application/javascript"></script>
   <script src="presetConfig.js" type="application/javascript"></script>
   <script src="userLogin.js" type="application/javascript"></script>
-
-  <script>
+<script>
   document.addEventListener("DOMContentLoaded", function() {
-    var game = initializeGame();
-    shipPreset();
+    window.game = initializeGame();
+    //shipPreset();
     var playerTable = createBoard(game.playerGrid, "playerTable");
-    //var computerTable = createBoard(game.computerGrid,"computerTable");
+    var computerTable = createBoard(game.computerGrid,"computerTable");
     var playerHeaderTable = createHeader(10,10,);
     var playerGrid = document.getElementById('playerBoardContainer');
     var playerHeader = document.getElementById('playerBoardHeader');
@@ -88,15 +88,16 @@
     var computerHeader = document.getElementById('computerBoardHeader');
     playerGrid.innerHTML = playerTable;
     computerGrid.innerHTML = computerTable;
-    gridClick('playerTable');
-    gridClick('computerTable');
+    playerGridClick(game);
+    computerGridClick(game);
     // selectorEvent();
-    shipButtonClick();
+    shipButtonClick(game);
     // inputBlur();
-    orientationButtonClick();
+    orientationButtonClick(game);
+    placeShipButtonClick(game);
     // moveSignature();
-    loadUserCredentials();
-    clearUserData();
+    //loadUserCredentials();
+    //clearUserData();
 });
   </script>
 

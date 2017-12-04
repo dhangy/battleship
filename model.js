@@ -9,6 +9,14 @@ function Game(playerGrid, computerGrid, playerShips, computerShips){
     this.gameComplete = false;
     this.isPlayersTurn = true;
     this.allShipsPlaced = false;
+    this.lastClickedPlayerRow = null;
+    this.lastClickedPlayerColumn = null;
+    this.lastClickedComputerRow = null;
+    this.lastClickedComputerColumn = null;
+    this.lastClickedButton = null;
+    this.selectdShip = null;
+    this.selectedOrientation = null;
+
 }
 
 function Ship(size, location){
@@ -85,8 +93,9 @@ function createGrid(col,row) {
     return grid;
 }
 
-function placeShip(ship, row, col, alignment, playerGrid,size){
+function placeShip(ship, row, col, alignment, playerGrid){
     var shipLen;
+    var size = ship.size;
     if(ship.size == null) {
         shipLen = size;
     }

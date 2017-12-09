@@ -8,15 +8,47 @@ function createBoard(modelGrid,gridType) {
         for(var c = 0; c < size; c++){
             rcounter++;
             var tileStatus = "";
-            if (modelGrid[r][c] == "="){
-                tileStatus = "ship";
+                if (modelGrid[r][c] == "="){
+                    tileStatus = "ship";
+                }
+                if(modelGrid[r][c] == "X"){
+                    tileStatus = "hit";
+                }
+                if(modelGrid[r][c] == "O") {
+                    tileStatus = "miss"
+                }
+
+            if (rcounter%2 == 0){
+                table+= '<td class="blue_two gameboardCells ' + gridType + ' '+ tileStatus +'" data-x=' + r + ' data-y=' + c + '>' +  '</td>';
+
             }
-            if(modelGrid[r][c] == "X"){
-                tileStatus = "hit";
+            else {
+                table+= '<td class="blue_one gameboardCells '+ gridType + ' ' + tileStatus +'" data-x=' + r + ' data-y=' + c + '>' + '</td>';
             }
-            if(modelGrid[r][c] == "O") {
-                tileStatus = "miss"
-            }
+        }
+            table+= '</tr>';
+    }
+    return '<table class="grid">' + table + '</table>';
+}
+
+function createComputerBoard(model,gridType) {
+    var table = '';
+    var grid = model.computerGrid;
+     var size = grid.length;
+    var rcounter = 0;
+    for(var r = 0; r < size; r++){
+        table += '<tr>';
+        rcounter++;
+        for(var c = 0; c < size; c++){
+            rcounter++;
+            var tileStatus = "";
+
+                if(grid[r][c] == "X"){
+                    tileStatus = "hit";
+                }
+                if(grid[r][c] == "O") {
+                    tileStatus = "miss"
+                }
 
             if (rcounter%2 == 0){
                 table+= '<td class="blue_two gameboardCells ' + gridType + ' '+ tileStatus +'" data-x=' + r + ' data-y=' + c + '>' +  '</td>';
@@ -52,9 +84,8 @@ function createHeader(){
 
 function playerGridClick(model){
     var cells = document.getElementsByClassName('playerTable');
-    console.log(cells.length);
     for (var i = 0; i < cells.length; i++){
-        cells[i].addEventListener("click", function(e) {
+        cells[i].addEventListener("click", function playerGridEvent(e) {
             console.log("IT WORKED!");
 
             var y = e.target.dataset.y;
@@ -71,18 +102,18 @@ function playerGridClick(model){
 
     function computerGridClick(model){
         var cells = document.getElementsByClassName('computerTable');
-        console.log(cells.length);
         for (var i = 0; i < cells.length; i++){
             cells[i].addEventListener("click", function(e) {
                 console.log("IT WORKED!");
-
                 var y = e.target.dataset.y;
                 var x = e.target.dataset.x;
                 var contents = "(" + x + "," + y + ")";
                 this.innerHTML = contents;
-                this.className += " hit";
+                launchMissile(x,y,model.computerGrid,model.computerShips);
+                generateComputerGrid(model);
                 model.lastClickedComputerRow = parseInt(x);
                 model.lastClickedComputerColumn = parseInt(y);
+                computerRandomGuess(model);
 
                 });
             }
@@ -92,9 +123,7 @@ function playerGridClick(model){
 function selectorEvent(){
     var e = document.getElementById("choiceSelect");
     e.addEventListener("change", function(e) {
-        console.log(e);
         var value = e.target.selectedOptions[0].value;
-        //console.log( e.target.options.selectedIndex.text);
         var header = document.getElementById("choice")
         header.innerHTML = value;
 
@@ -111,7 +140,6 @@ function shipButtonClick(model){
         header.innerHTML = name;
         model.selectedShip = model.playerShips[shipName];
         model.lastClickedButton = shipName;
-        console.log(model.selectedShip);
 
     });
 }
@@ -132,7 +160,7 @@ function orientationButtonClick(model){
 
 function placeShipButtonClick(model){
     var placeShipButton = document.getElementById("placeShipButton");
-    placeShipButton.addEventListener("click", function(e){
+    placeShipButton.addEventListener("click", function (e){
         var ship = model.selectedShip;
         var coordinates = model.lastClickedPlayerSquare;
         var row = model.lastClickedPlayerRow;
@@ -140,14 +168,16 @@ function placeShipButtonClick(model){
         var alignment = model.selectedOrientation;
         var playerGrid = model.playerGrid;
         placeShip(ship, row, col, alignment, playerGrid);
+        model.playerShips.shipsPlaced++;
         var buttonId =  model.lastClickedButton+"Bttn";
         var buttonImg = model.lastClickedButton;
         disableButtons(buttonId,buttonImg);
-        var setupComplete = isSetupStateComplete();
-        if (setupComplete = true){
-
+        var setupComplete = isSetupStateComplete(model);
+        if (setupComplete == true){
+            //transition to playState
+            clearSetupState(model);
         }
-
+        generatePlayerGrid(model);
 
 
 
@@ -159,26 +189,109 @@ function disableButtons(buttonId, buttonImg){
     button.disabled = true;
     button.className+= "disabledButton";
     buttonImg.className+= "disabledImg";
-    document.getElementById(buttonImg).removeEventListener("click", shipButtonClick, true);
+    document.getElementById(buttonImg).removeEventListener("click", disableButtons, true);
 
 }
 
-function isSetupStateComplete(){
-        var completeCounter = 0;
-        var buttons = document.getElementsByClassName("shipButtons");
-        for(var i = 0; i < buttons.length; i++){
-            if(buttons[i].disabled = true){
-                completeCounter++;
-            }
-        }
-        if (completeCounter = 5){
-            return true;
-        }
-        else{
-            return false;
-        }
+function isSetupStateComplete(model){
+    if(model.playerShips.shipsPlaced == 5) {
+        model.allShipsPlaced = true;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function clearSetupState(model) {
+    generateComputerGrid(model);
+    var setupTools = document.getElementById('setupSelections');
+    setupTools.className+= 'displayNone';
+    //hide the ship buttons
+    //hide the alignment buttons
+    //make the playerGrid non-clickable
+    var grid = document.getElementById('playerBoardContainer');
+    grid.className+= 'nonClickable'
+    var board = document.getElementById('scoreBoard');
+    getScores();
+    playStateController(model);
+}
+
+
+function playStateController(model){
+
 
 }
-function beginPlayState(){
 
+function generatePlayerGrid(model){
+    var playerTable = createBoard(model.playerGrid, "playerTable");
+    var playerHeaderTable = createHeader(10,10,);
+    var playerGrid = document.getElementById('playerBoardContainer');
+    var playerHeader = document.getElementById('playerBoardHeader');
+    playerGrid.innerHTML = playerTable;
+    playerGridClick(model);
+}
+
+function generateComputerGrid(model){
+    var computerTable = createComputerBoard(model,"computerTable");
+    var computerGrid = document.getElementById('computerBoardContainer');
+    computerGrid.innerHTML = computerTable;
+    computerGridClick(model);
+}
+
+function playerGridNonClick(model){
+    //var playerGrid = document.getElementById('playerBoardContainer');
+    //playerGrid.removeEventListener('click', playerGridNonClick , false);
+        var cells = document.getElementsByClassName('playerTable');
+        for (var i = 0; i < cells.length; i++){
+            cells[i].removeEventListener("click", playerGridNonClick, false);
+            };
+        }
+function placeShipsRandom(model) {
+    var placeRandomButton = document.getElementById("placeRandom");
+    placeRandomButton.addEventListener("click", function(e) {
+        randomPlayerShipPlacer(model);
+        generatePlayerGrid(model);
+        clearSetupState(model);
+    });
+}
+function setWinRecord(winner){
+    myStorage = window.localStorage;
+    var wins = myStorage.getItem(winner);
+    console.log(winner);
+    wins = parseInt(wins);
+    wins++;
+    wins.toString();
+    myStorage.setItem(winner, wins);
+    console.log(wins);
+    getScores();
+
+}
+function playSound(){
+    var sound = new Audio("assets/explosion.wav");
+    sound.play();
+    sound.currentTime=0;
+    console.log("I tried");
+}
+
+function playSink() {
+    var sound = new Audio("assets/sink.wav");
+    sound.play();
+    sound.currentTime=0;
+    console.log("I tried");
+}
+
+function getScores(){
+    myStorage = window.localStorage;
+    if (myStorage.getItem("playerWins") == null){
+        myStorage.setItem("playerWins", "0");
+    }
+    if (myStorage.getItem("computerWins") == null){
+        myStorage.setItem("computerWins", "0");
+    }
+    var playerWins = myStorage.getItem("playerWins");
+    var computerWins = myStorage.getItem("computerWins");
+    var string = "Player Wins: " + playerWins + "&nbsp;&nbsp;" + "Computer Wins: " + computerWins;
+    var board = document.getElementById('scoreBoard');
+    board.innerHTML = string;
 }

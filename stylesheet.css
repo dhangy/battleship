@@ -10,12 +10,12 @@ table {
   padding: 20px;
 }
 #playerBoardContainer {
-margin-top: 50px;
+
 padding-left: 54px;
 padding-top: 54px;
 }
 #computerBoardContainer {
-margin-top: 50px;
+margin-top: -75px;
 padding-left: 54px;
 padding-top: 74px;
 }
@@ -42,7 +42,7 @@ h1 {
 
 
 .miss{
-  background-color: #fff7f7;
+  background-color: #fff7f7 !important;
 }
 
 .gameboardCells.ship{
@@ -78,10 +78,15 @@ color: #e72f2f;
 }
 
 .blue_one{
-    background-color: #ade9ff;
+    /*background-color: #ade9ff;*/
+    /*background-color: #08dbd7;*/
+    background-color: #21cecb;
+
 }
 .blue_two {
-    background-color: #36d8bf;
+    /*background-color: #36d8bf;*/
+    background-color: #2bfffb;
+
 }
 .gameBoardCells{
 
@@ -90,7 +95,7 @@ color: #e72f2f;
 
 }
 td:hover{
-    background-color: #8eafa8 !important;
+    background-color: #8eafa8 ;
 }
 
 .shipButtons{
@@ -167,11 +172,15 @@ width:100px;
 #playerBoardParent{
     position:relative;
     display: block;
+    margin-right: 55px;
+    float: right;
 }
 #computerBoardParent{
     position:relative;
     display:block;
     margin-top:50px;
+    margin-left: 55px;
+    float: left;
 }
 
 #playerBoardHeader{
@@ -197,4 +206,21 @@ width:100px;
 .disabledImg.ship{
         filter: none;
 
+}
+
+#setupSelections{
+margin-top: 3%;
+margin-left: 10%;
+margin-bottom: 10%;
+}
+
+.displayNone{
+    display: none;
+}
+
+.nonClickable {
+    pointer-events: none;
+}
+#scoreBoard {
+    text-align: center;
 }
